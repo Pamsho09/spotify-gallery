@@ -17,12 +17,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     // eslint-disable-next-line no-magic-numbers
     BAD_REQUEST = 400,
   }
-  const token = await SpotifyService.getToken()
-  if (typeof token === 'string') {
+
+  try {
+    const token = await SpotifyService.getToken()
     res.status(STATUS_CODES.OK).json({ token })
-  } else {
-    res.status(STATUS_CODES.BAD_REQUEST).json({
-      error: token?.message,
+  } catch (error) {
+    const { response, message } = error as {
+      response: { status: number }
+      message: string
+    }
+    res.status(response.status).json({
+      error: message,
     })
   }
 }
