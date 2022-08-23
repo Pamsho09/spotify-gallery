@@ -101,7 +101,7 @@ const Home: NextPage = () => {
             data &&
             Object.keys(data).map((key) => (
               <div key={key} className="w-3/4">
-                <h1>{key}</h1>
+                <h1 className="font-bold text-lg my-4 capitalize">{key}</h1>
                 <div className="  grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 mt-6">
                   {data[key as keyof ResponseSearch].map(
                     (item: ResponseItem) => (
