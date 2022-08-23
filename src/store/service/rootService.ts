@@ -4,7 +4,7 @@ import { axiosBaseQuery } from '../../uitils/axiosCustom'
 export const rootServices = createApi({
   reducerPath: 'rootServices',
   baseQuery: axiosBaseQuery({
-    baseUrl: 'http://localhost:3000/api/',
+    baseUrl: '/api/',
   }),
   endpoints: () => ({}),
 })
