@@ -1,6 +1,6 @@
 // eslint-disable-next-line filenames/match-regex
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { ResposeTrack } from '../../../service/dto/responseTrack'
+import { ResponseTrack } from '../../../service/dto/responseTrack'
 import { SpotifyService } from '../../../service/spotifyService'
 
 type Data = {
@@ -9,7 +9,7 @@ type Data = {
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse<ResposeTrack[] | Data>
+  res: NextApiResponse<ResponseTrack[] | Data>
 ) => {
   enum STATUS_CODES {
     // eslint-disable-next-line no-magic-numbers

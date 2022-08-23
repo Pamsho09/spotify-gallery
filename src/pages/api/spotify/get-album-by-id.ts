@@ -1,5 +1,6 @@
+// eslint-disable-next-line filenames/match-regex
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { ResponseSearch } from '../../../service/dto/responseSearch'
+import { ResponseAlbumDetail } from '../../../service/dto/responseAlbumDetail'
 import { SpotifyService } from '../../../service/spotifyService'
 
 type Data = {
@@ -8,21 +9,20 @@ type Data = {
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse<ResponseSearch | Data>
+  res: NextApiResponse<ResponseAlbumDetail | Data>
 ) => {
   enum STATUS_CODES {
     // eslint-disable-next-line no-magic-numbers
     OK = 200,
   }
   if (req.headers.authorization) {
-    console.log(req.headers.authorization)
     const spotifyService = new SpotifyService(req.headers.authorization)
     switch (req.method) {
       case 'GET':
-        const { p, type } = req.query as { p: string; type: string }
+        const { id } = req.query as { id: string }
         try {
-          const data = await spotifyService.getSearch(p, type)
-          res.status(STATUS_CODES.OK).json(data as ResponseSearch)
+          const data = await spotifyService.getAlbumById(id)
+          res.status(STATUS_CODES.OK).json(data)
         } catch (error) {
           const { response, message } = error as {
             response: { status: number }

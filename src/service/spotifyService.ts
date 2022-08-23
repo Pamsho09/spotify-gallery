@@ -3,8 +3,10 @@ import credential from '../config/config'
 import { stringify } from 'qs'
 import { ResponseItem } from './dto/responseItem'
 import { ResponseSearch } from './dto/responseSearch'
-import { ResposeTrack } from './dto/responseTrack'
+import { ResponseTrack } from './dto/responseTrack'
 import { ResposeTrackDetail } from './dto/responseTrackDetail'
+import { ResponseArtistDetail } from './dto/responseArtistDetail'
+import { ResponseAlbumDetail } from './dto/responseAlbumDetail'
 
 export class SpotifyService {
   request: AxiosInstance
@@ -50,13 +52,21 @@ export class SpotifyService {
     )
   }
 
-  async getTracksByAlbumId(id: string): Promise<ResposeTrack[]> {
+  async getTracksByAlbumId(id: string): Promise<ResponseTrack[]> {
     const { data } = await this.request.get(`albums/${id}/tracks`)
-    return data.items.map((item: any) => new ResposeTrack(item))
+    return data.items.map((item: any) => new ResponseTrack(item))
   }
 
   async getTrackById(id: string): Promise<ResposeTrackDetail> {
     const { data } = await this.request.get(`tracks/${id}`)
     return new ResposeTrackDetail(data)
+  }
+  async getArtistById(id: string): Promise<ResponseArtistDetail> {
+    const { data } = await this.request.get(`artists/${id}`)
+    return new ResponseArtistDetail(data)
+  }
+  async getAlbumById(id: string): Promise<ResponseAlbumDetail> {
+    const { data } = await this.request.get(`albums/${id}`)
+    return new ResponseAlbumDetail(data)
   }
 }

@@ -1,4 +1,4 @@
-export class ResposeTrack {
+export class ResponseTrack {
   artist: string[]
   name: string
   previewUrl: string
