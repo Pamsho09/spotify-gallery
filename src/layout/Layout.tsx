@@ -12,7 +12,9 @@ const Layout = ({ children }: React.PropsWithChildren) => {
     <div className="w-full flex flex-col h-screen">
       <header className="w-full h-20 items-center flex bg-blue-600 p-3">
         <Link href={'/'}>
-          <h2 className="text-4xl text-white font-bold">Spotifu Gallery</h2>
+          <h2 className="text-4xl cursor-pointer text-white font-bold">
+            Spotifu Gallery
+          </h2>
         </Link>
       </header>
       {children}
