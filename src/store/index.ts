@@ -7,14 +7,38 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import { rootServices } from './service/rootService'
 import userReducer from './slice/userStore'
 import uiReducer from './slice/uiStore'
-
+import {
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+  persistReducer,
+  persistStore,
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+const persistConfig = {
+  key: 'root',
+  version: 1,
+  whitelist: ['user'],
+  storage,
+}
 export const reducers = combineReducers({
   user: userReducer,
   ui: uiReducer,
   [rootServices.reducerPath]: rootServices.reducer,
 })
+const persistedReducer = persistReducer(persistConfig, reducers)
+
 export const store = configureStore({
-  reducer: reducers,
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(rootServices.middleware),
 })
 export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
   configureStore({
@@ -22,6 +46,7 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
     preloadedState,
   })
 setupListeners(store.dispatch)
+export const persistor = persistStore(store)
 export type RootState = ReturnType<typeof reducers>
 export type AppStore = ReturnType<typeof setupStore>
 export type IRootState = ReturnType<typeof store.getState>
