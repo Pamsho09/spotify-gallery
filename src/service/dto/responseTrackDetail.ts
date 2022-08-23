@@ -1,6 +1,3 @@
-const milliseconds = 1000
-const seconds = 60
-const length = 2
 export class ResposeTrackDetail {
   name: string
   spotifyUri: string
@@ -19,11 +16,7 @@ export class ResposeTrackDetail {
     this.spotifyUri = data.uri
     this.previewUrl = data.preview_url
     this.id = data.id
-    this.duration = `${data.duration_ms / milliseconds / seconds}:${(
-      data.duration_ms % milliseconds
-    )
-      .toString()
-      .padStart(length, '0')}`
+    this.duration = millisToMinutesAndSeconds(data.duration_ms)
     this.album = {
       name: data.album.name,
       id: data.album.id,
@@ -34,4 +27,13 @@ export class ResposeTrackDetail {
       id: item.id,
     }))
   }
+}
+
+const millisToMinutesAndSeconds = (millis: number) => {
+  const MINUTES = 60000
+  const SECONDS = 1000
+  const DIGITS = 2
+  const minutes = Math.floor(millis / MINUTES)
+  const seconds = ((millis % MINUTES) / SECONDS).toFixed(0)
+  return `${minutes}:${seconds.padStart(DIGITS, '0')}`
 }
