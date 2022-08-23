@@ -1,34 +1,119 @@
-nomThis is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Spotifu Gallery
 
-First, run the development server:
+Spotifu Gallery here you can search for your favorite artist, album and track.
+
+
+## Demo
+https://spotify-gallery.vercel.app/
+
+
+## Tech Stack
+
+🥬**Node 16**
+⚛️**React 18**
+💎**Tailwind Css**
+🔺**Next js**
+🪀**RTK Redux**
+
+
+## Installation
+
+Install spotify-gallery with npm
 
 ```bash
+git clone https://github.com/Pamsho09/spotify-gallery.git
+cd spotify-gallery
+npm i 
 npm run dev
-# or
-yarn dev
+```
+    
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  npm run lint
+  npm run test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Screenshots
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+## how does spotify auth work? 
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## API Reference
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### Get token 
 
-## Deploy on Vercel
+```http
+  GET /api/auth/spotify
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+***the following endpoints require a bearer token*** 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+#### Get tracks, albums and artist
+
+```http
+  GET /api/spotify/search?p=${p}&type=${type}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `p`      | `string` | **Required**. p of item to fetch |
+| `type`      | `string` | **Required**. type of item to fetch |
+
+
+#### Get artist by id
+
+```http
+  GET /api/spotify/get-artist-by-id?id=${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of item to fetch |
+
+#### Get albums by artist id
+
+```http
+  GET /api/spotify/get-albums-by-artist-id?id=${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of item to fetch |
+
+#### Get album by id
+
+```http
+  GET /api/spotify/get-album-by-id?id=${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of item to fetch |
+
+#### Get tracks by album id
+
+```http
+  GET /api/spotify/get-tracks-by-album-id?id=${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of item to fetch |
+
+#### Get track by id
+
+```http
+  GET /api/spotify/get-track-by-id?id=${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of item to fetch |
