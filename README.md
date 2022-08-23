@@ -40,10 +40,12 @@ To run tests, run the following command
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/Pamsho09/spotify-gallery/blob/main/screenshots/home.png?raw=true)
 
 
 ## how does spotify auth work? 
+![auth spotify](https://github.com/Pamsho09/spotify-gallery/blob/main/screenshots/auth.png?raw=true)
+![get with token](https://github.com/Pamsho09/spotify-gallery/blob/main/screenshots/fetch.png?raw=true)
 
 
 ## API Reference
