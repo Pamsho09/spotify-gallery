@@ -15,7 +15,6 @@ const handler = async (
     OK = 200,
   }
   if (req.headers.authorization) {
-    console.log(req.headers.authorization)
     const spotifyService = new SpotifyService(req.headers.authorization)
     switch (req.method) {
       case 'GET':
